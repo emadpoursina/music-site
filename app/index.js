@@ -1,9 +1,11 @@
 import express from "express"
-const app = express();
 import http from 'http'
 import helmet from "helmet"
 import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
+import router from './routes/web/index.js'
+
+const app = express();
 
 export default class Application {
     constructor() {
@@ -68,7 +70,7 @@ export default class Application {
 
     setRouters() {
         csrf({ cookie : true }) 
-        // app.use(require('app/routes/web'));
+        app.use(router)
         // app.use(csrfErrorHandler.handle);
     }
 }
