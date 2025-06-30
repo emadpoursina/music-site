@@ -1,5 +1,5 @@
 import express from 'express'
-import homeRouter from './home.js'
+import pageRouter from './page.js'
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ const router = express.Router();
 // router.use('/admin' , redirectIfNotAuthenticated.handle,  redirectIfNotAdmin.handle, adminRouter);
 
 // Home Router
-router.use('/' , homeRouter);
+router.use('/' , pageRouter);
 
 // Dashboard Router
 // const dashboardRouter = require('app/routes/web/dashboard');
