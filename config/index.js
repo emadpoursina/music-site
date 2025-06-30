@@ -1,10 +1,10 @@
-// const database = require('./database');
+import database from './database.js'
 // const session = require('./session');
 // const layout = require('./layout');
 // const service = require('./service');
 
 export default {
-    // database,
+    database,
     // session,
     // layout,
     // service,

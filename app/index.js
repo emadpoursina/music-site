@@ -1,8 +1,18 @@
+// const validator = require('express-validator');
+// const cookieParser = require('cookie-parser');
+// const session = require('express-session');
+// const flash = require('connect-flash');
+// const passport = require('passport');
+// const Helpers = require('./helpers');
+// const methodOverride = require('method-override');
+// const csrfErrorHandler = require('app/http/middleware/csrfErrorHandler');
+// const rememberLogin = require('app/http/middleware/rememberLogin');
 import express from "express"
 import http from 'http'
 import helmet from "helmet"
 import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
+import mongoose from 'mongoose'
 import router from './routes/web/index.js'
 
 const app = express();
@@ -10,7 +20,7 @@ const app = express();
 export default class Application {
     constructor() {
         this.setupExpress();
-        // this.setMongoConnection();
+        this.setMongoConnection();
         this.setConfig();
         this.setRouters();
     }
@@ -21,18 +31,18 @@ export default class Application {
         server.listen(config.port , () => console.log(`Listening on port ${config.port}`));
     }
 
-    // setMongoConnection() {
-    //     mongoose.Promise = global.Promise;
-    //     mongoose.connect(config.database.url ,
-    //      { 
-    //        useNewUrlParser: true,
-    //        useUnifiedTopology: true,
-    //        useCreateIndex: true,
-    //        useFindAndModify: false,
-    //      })
-    //     .then(() => console.log(`Connected ...`))
-    //     .catch((err) => console.log(err.message));
-    // }
+    setMongoConnection() {
+        mongoose.Promise = global.Promise;
+        mongoose.connect(config.database.url ,
+         { 
+           useNewUrlParser: true,
+           useUnifiedTopology: true,
+           useCreateIndex: true,
+           useFindAndModify: false,
+         })
+        .then(() => console.log(`Connected ...`))
+        .catch((err) => console.log(err.message));
+    }
 
     /**
      * Express Config
