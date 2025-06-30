@@ -9,7 +9,7 @@ export default {
     // layout,
     // service,
     port : process.env.APPLICATION_PORT || 3000,
-    // cookie_secretkey : process.env.COOKIE_SECRETKEY,
+    cookie_secretkey : process.env.COOKIE_SECRETKEY || "ksdljf8w3f9",
     // debug : true,
     // siteurl : process.env.WEBSITE_URL,
     // jwt : {

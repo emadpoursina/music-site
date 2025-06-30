@@ -2,13 +2,15 @@ import express from "express"
 const app = express();
 import http from 'http'
 import helmet from "helmet"
+import cookieParser from 'cookie-parser'
+import csrf from 'csurf'
 
 export default class Application {
     constructor() {
         this.setupExpress();
         // this.setMongoConnection();
         this.setConfig();
-        // this.setRouters();
+        this.setRouters();
     }
 
 
@@ -52,7 +54,7 @@ export default class Application {
     //     app.use(methodOverride('_method'));
     //     app.use(validator());
     //     app.use(session({...config.session}));
-    //     app.use(cookieParser(config.cookie_secretkey));
+        app.use(cookieParser(config.cookie_secretkey));
     //     app.use(flash());
     //     app.use(passport.initialize());
     //     app.use(passport.session());
@@ -64,9 +66,9 @@ export default class Application {
     //     });
     }
 
-    // setRouters() {
-    //     csrf({ cookie : true }) ,
-    //     app.use(require('app/routes/web'));
-    //     app.use(csrfErrorHandler.handle);
-    // }
+    setRouters() {
+        csrf({ cookie : true }) 
+        // app.use(require('app/routes/web'));
+        // app.use(csrfErrorHandler.handle);
+    }
 }
