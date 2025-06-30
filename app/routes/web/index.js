@@ -1,5 +1,10 @@
 import express from 'express'
 import pageRouter from './page.js'
+import singerRouter from './singer.js'
+import albumRouter from './album.js'
+import genreRouter from './genre.js'
+import musicRouter from './music.js'
+import postRouter from './post.js'
 
 const router = express.Router();
 
@@ -15,6 +20,21 @@ const router = express.Router();
 
 // Home Router
 router.use('/' , pageRouter);
+
+// Singer Router
+router.use('/singer' , singerRouter);
+
+// Album Router
+router.use('/album', albumRouter);
+
+// Genre Router
+router.use('/genre', genreRouter);
+
+// Music Router
+router.use('/music', musicRouter);
+
+// Post Router
+router.use('/post', postRouter);
 
 // Dashboard Router
 // const dashboardRouter = require('app/routes/web/dashboard');
