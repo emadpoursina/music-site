@@ -1,0 +1,9 @@
+{
+  "name": "Music App",
+  "module": "server.js",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
