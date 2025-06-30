@@ -2,8 +2,9 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema;
 
-const genreSchema = Schema({
+const genreSchema = new Schema({
     name: { type: String, required: true },
-}, { timestamps: true, toJSON: { virtuals: true } });
+    description: { type: String },
+}, { timestamps: { createdAt: true, updatedAt: false }, toJSON: { virtuals: true } });
 
 export default mongoose.model('Genre', genreSchema) 
