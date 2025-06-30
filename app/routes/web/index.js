@@ -20,10 +20,6 @@ router.use('/' , pageRouter);
 // const dashboardRouter = require('app/routes/web/dashboard');
 // router.use('/dashboard' , dashboardRouter);
 
-// Product Router
-// const productRouter = require('app/routes/web/product');
-// router.use('/' , productRouter);
-
 // Auth Router
 // const authRouter = require('app/routes/web/auth');
 // router.use('/auth' , redirectIfAuthenticated.handle ,authRouter);
