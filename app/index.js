@@ -1,6 +1,7 @@
 import express from "express"
 const app = express();
 import http from 'http'
+import helmet from "helmet"
 
 export default class Application {
     constructor() {
@@ -36,7 +37,7 @@ export default class Application {
     //     require('app/passport/passport-local');
  
     //     app.enable('trust proxy');
-    //     app.use(helmet());
+        app.use(helmet());
     //     app.use(express.static(config.layout.public_dir));
     //     app.set('view engine', config.layout.view_engine);
     //     app.set('views' , config.layout.view_dir);
