@@ -5,6 +5,7 @@ import albumRouter from './album.js'
 import genreRouter from './genre.js'
 import musicRouter from './music.js'
 import postRouter from './post.js'
+import authRouter from './auth.js'
 
 const router = express.Router();
 
@@ -41,8 +42,8 @@ router.use('/post', postRouter);
 // router.use('/dashboard' , dashboardRouter);
 
 // Auth Router
-// const authRouter = require('app/routes/web/auth');
 // router.use('/auth' , redirectIfAuthenticated.handle ,authRouter);
+router.use('/auth', authRouter);
 
 // Handle Errors
 // router.all('*' , errorHandler.error404);
