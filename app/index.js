@@ -14,6 +14,7 @@ import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
 import mongoose from 'mongoose'
 import router from './routes/web/index.js'
+import config from "config"
 
 const app = express();
 
@@ -28,20 +29,14 @@ export default class Application {
 
     setupExpress() {
         const server = http.createServer(app);
-        server.listen(config.port , () => console.log(`Listening on port ${config.port}`));
+        server.listen(config.get("port") , () => console.log(`Listening on port ${config.get("port")}`));
     }
 
     setMongoConnection() {
         mongoose.Promise = global.Promise;
-        mongoose.connect(config.database.url ,
-         { 
-           useNewUrlParser: true,
-           useUnifiedTopology: true,
-           useCreateIndex: true,
-           useFindAndModify: false,
-         })
-        .then(() => console.log(`Connected ...`))
-        .catch((err) => console.log(err.message));
+        mongoose.connect(config.get("database.url"))
+        .then(() => console.log(`Connected to database`))
+        .catch((err) => console.log('error in connecting to database', err.message));
     }
 
     /**
@@ -66,7 +61,7 @@ export default class Application {
     //     app.use(methodOverride('_method'));
     //     app.use(validator());
     //     app.use(session({...config.session}));
-        app.use(cookieParser(config.cookie_secretkey));
+        app.use(cookieParser(config.get("cookie_secretkey")));
     //     app.use(flash());
     //     app.use(passport.initialize());
     //     app.use(passport.session());
