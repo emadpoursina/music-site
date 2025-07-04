@@ -10,7 +10,7 @@ const socialLinksSchema = new Schema({
 }, { _id: false });
 
 const singerSchema = new Schema({
-    name: { type: String, required: true },
+    name: { type: String, unique: true, required: true },
     bio: { type: String },
     avatarUrl: { type: String },
     socialLinks: socialLinksSchema,
