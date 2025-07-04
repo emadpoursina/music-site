@@ -1,13 +1,14 @@
-// const autoBind = require("auto-bind");
+const autoBind = require("auto-bind");
+import autoBind from "auto-bind";
 // const isMongoId = require("validator/lib/isMongoId");
 // const mail = require("app/helpers/mail");
 // const { validationResult } = require("express-validator/check");
 // const Subscriber = require("../../models/subscriber");
 
 export default class Controller {
-//   constructor() {
-//     autoBind(this);
-//   }
+  constructor() {
+    autoBind(this);
+  }
 
 //   back(req, res) {
 //     req.flash("formData", req.body);
