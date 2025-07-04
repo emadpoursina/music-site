@@ -8,10 +8,7 @@ const trackSchema = new Schema({
     album: { type: Schema.Types.ObjectId, ref: 'Album' },
     genre: { type: Schema.Types.ObjectId, ref: 'Genre' },
     audioUrl: { type: String },
-    coverImageUrl: { type: String },
-    uploadedBy: { type: Schema.Types.ObjectId, ref: 'User' },
-    duration: { type: Number },
-    plays: { type: Number, default: 0 },
+    coverImageUrl: { type: String }
 }, { timestamps: { createdAt: true, updatedAt: false }, toJSON: { virtuals: true } });
 
 export default mongoose.model('Track', trackSchema)
