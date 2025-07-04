@@ -14,6 +14,7 @@ import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
 import mongoose from 'mongoose'
 import router from './routes/web/index.js'
+import bodyParser from 'body-parser'
 import config from "config"
 
 const app = express();
@@ -45,8 +46,10 @@ export default class Application {
     setConfig() {
     //     require('app/passport/passport-local');
  
-    //     app.enable('trust proxy');
+    //     app.enable('trust proxy'); 
         app.use(helmet());
+        app.use(express.json());
+        app.use(express.urlencoded({ extended: true }));
     //     app.use(express.static(config.layout.public_dir));
     //     app.set('view engine', config.layout.view_engine);
     //     app.set('views' , config.layout.view_dir);
@@ -56,8 +59,8 @@ export default class Application {
     //     app.set("layout" , config.layout.ejs.master);
 
 
-    //     app.use(bodyParser.json());
-    //     app.use(bodyParser.urlencoded({ extended : true }));
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({ extended : true }));
     //     app.use(methodOverride('_method'));
     //     app.use(validator());
     //     app.use(session({...config.session}));
