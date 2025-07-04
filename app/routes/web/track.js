@@ -3,6 +3,19 @@ import Track from '../../models/track.js';
 
 const router = express.Router();
 
+// GET /track → Get all tracks
+router.get('/', async (req, res) => {
+  try {
+    const tracks = await Track.find()
+      .populate('singer')
+      .populate('album')
+      .populate('genre')
+    res.json(tracks);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // POST /track → Add a new track
 router.post('/', async (req, res) => {
   try {
