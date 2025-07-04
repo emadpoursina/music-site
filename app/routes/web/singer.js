@@ -16,10 +16,8 @@ router.get('/' , async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const singer = new Singer(req.body);
-        console.log(req.body);
         
         await singer.save();
-        res.send("singer added successfully");
         res.status(201).json(singer);
     } catch (err) {
         res.status(400).json({ error: 'Failed to add singer', details: err.message });
