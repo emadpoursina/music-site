@@ -3,7 +3,7 @@ import pageRouter from './page.js'
 import singerRouter from './singer.js'
 import albumRouter from './album.js'
 import genreRouter from './genre.js'
-import musicRouter from './music.js'
+import trackRouter from './track.js'
 import postRouter from './post.js'
 import authRouter from './auth.js'
 
@@ -32,7 +32,7 @@ router.use('/album', albumRouter);
 router.use('/genre', genreRouter);
 
 // Music Router
-router.use('/music', musicRouter);
+router.use('/track', trackRouter);
 
 // Post Router
 router.use('/post', postRouter);
