@@ -32,7 +32,12 @@ router.post('/', async (req, res) => {
         await singer.save();
         res.status(201).json(singer);
     } catch (err) {
-        res.status(400).json({ error: 'Failed to add singer', details: err.message });
+        if (err.code === 11000) {
+            // Duplicate key error (name already exists)
+            res.status(400).json({ error: 'Failed to add singer', details: "Singer already exists."});
+        } else {
+            res.status(400).json({ error: 'Failed to add singer', details: err.message });
+        }
     }
 });
 
