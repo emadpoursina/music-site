@@ -1,3 +1,6 @@
 { 
-  "cookie_secretkey": "hamyar_cookieSecretkey"
+  "cookie_secretkey": "hamyar_cookieSecretkey",
+  "jwt": {
+    "secret": "ksdlfji3klsedf"
+  }
 }

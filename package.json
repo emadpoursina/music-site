@@ -12,9 +12,9 @@
     "config": "^4.0.0",
     "cookie-parser": "^1.4.7",
     "csurf": "^1.11.0",
-    "dotenv": "^17.0.0",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.1",
     "mongoose-paginate": "^5.0.3",
     "unique-string": "^3.0.0"

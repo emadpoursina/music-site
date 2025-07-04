@@ -3,5 +3,9 @@
   "cookie_secretkey": "ksdljf8w3f9",
   "database": {
     "url" : "mongodb://localhost/musicapp"
+  },
+  "jwt": {
+    "secret": "ksdlfji3klsedf",
+    "expires": "7d"
   }
 }

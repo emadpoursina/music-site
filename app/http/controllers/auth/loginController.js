@@ -1,3 +1,5 @@
+import config from "config";
+import jwt from "jsonwebtoken";
 import Controller from "../controller.js";
 import User from "../../../models/user.js";
 
@@ -9,7 +11,7 @@ class loginController extends Controller {
   async login(req, res, next) {
     const { email, password } = req.body;
 
-    // Basic validation
+    // Validation
     if (!email || !password) {
       return res
         .status(400)
@@ -17,16 +19,32 @@ class loginController extends Controller {
     }
 
     try {
-      // Find user by email
       const user = await User.findOne({ email });
       if (!user) return res.status(404).json({ message: "User not found." });
 
-      // Validate password
       const isMatch = user.comparePassword(password);
       if (!isMatch)
         return res.status(401).json({ message: "Invalid credentials." });
 
-      // Login success
+      // Generate JWT
+      const payload = {
+        id: user._id,
+        email: user.email,
+      };
+
+      const token = jwt.sign(payload, config.get("jwt.secret"), {
+        expiresIn: config.get("jwt.expires"),
+      });
+
+      // Set cookie
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      });
+
+      // Send user info
       const userResponse = {
         _id: user._id,
         name: user.name,
