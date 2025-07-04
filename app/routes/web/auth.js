@@ -5,13 +5,13 @@ const router = express.Router();
 
 // Controllers
 import registerController from '../../http/controllers/auth/registerController.js';
-// const loginController = require('app/http/controllers/auth/loginController');
+import loginController from '../../http/controllers/auth/loginController.js';
 // const forgotPasswordController = require('app/http/controllers/auth/forgotPasswordController');
 // const resetPasswordController = require('app/http/controllers/auth/resetPasswordController');
 
 // Routes
-// router.get('/login' , loginController.showLoginForm);
-// router.post('/login' , loginController.login);
+router.get('/login' , loginController.showLoginForm);
+router.post('/login' , loginController.login);
 
 router.get('/register' , registerController.showRegsitrationForm);
 router.post('/register' , registerController.register); 
