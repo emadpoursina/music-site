@@ -31,4 +31,22 @@ router.get('/:genre_name', async (req, res) => {
   }
 });
 
+// POST /genres → Add a new genre
+router.post('/', async (req, res) => {
+  const { name, description } = req.body;
+
+  try {
+    const genre = new Genre({ name, description });
+    await genre.save();
+    res.status(201).json(genre);
+  } catch (err) {
+    if (err.code === 11000) {
+      // Duplicate key error (name already exists)
+      res.status(400).json({ message: 'Genre already exists' });
+    } else {
+      res.status(500).json({ message: err.message });
+    }
+  }
+});
+
 export default router;
