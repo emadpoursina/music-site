@@ -10,7 +10,7 @@ import genreController from "../../http/controllers/admin/genreController.js";
 import userController from "../../http/controllers/admin/userController.js";
 
 // Admin Routes
-router.get("/", adminController.index);
+router.get("/dashboard", adminController.dashboard);
 
 // Admin Tracks Routes
 router.get("/tracks", trackController.index);
