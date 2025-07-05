@@ -20,21 +20,23 @@ class loginController extends Controller {
 
     try {
       const user = await User.findOne({ email });
-      if (!user) return res.status(404).json({ message: "User not found." });
+      if (!user)
+        return res.status(401).json({ message: "Invalid credentials." });
 
       const isMatch = user.comparePassword(password);
       if (!isMatch)
         return res.status(401).json({ message: "Invalid credentials." });
 
-      // Generate JWT
-      const payload = {
-        id: user._id,
-        email: user.email,
-      };
-
-      const token = jwt.sign(payload, config.get("jwt.secret"), {
-        expiresIn: config.get("jwt.expires"),
-      });
+      const token = jwt.sign(
+        {
+          id: user._id,
+          email: user.email,
+        },
+        config.get("jwt.secret"),
+        {
+          expiresIn: config.get("jwt.expires"),
+        }
+      );
 
       // Set cookie
       res.cookie("token", token, {
