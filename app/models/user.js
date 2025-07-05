@@ -51,11 +51,11 @@ userSchema.methods.setRememberToken = function (res) {
 };
 
 userSchema.methods.generateAuthToken = function () {
-  jwt.sign(
+  return jwt.sign(
     {
-      id: user._id,
-      email: user.email,
-      role: user.role,
+      id: this._id,
+      email: this.email,
+      role: this.role,
     },
     config.get("jwt.secret"),
     {
