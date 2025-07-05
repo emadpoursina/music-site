@@ -5,11 +5,45 @@ class TrackController extends Controller {
   // GET /admin/tracks - List all tracks
   async index(req, res) {
     try {
-      const tracks = await Track.find()
+      const { situation, artistName, name, category } = req.query;
+
+      // Build filter object for direct fields
+      let filter = {};
+
+      // Filter by situation (publish status)
+      if (situation) {
+        filter.situation = situation;
+      }
+
+      // Filter by track name
+      if (name) {
+        filter.title = { $regex: name, $options: "i" };
+      }
+
+      let tracks = await Track.find(filter)
         .populate("singer", "name")
         .populate("album", "title")
         .populate("genre", "name")
         .sort({ createdAt: -1 });
+
+      // Filter by populated fields after population
+      if (artistName) {
+        tracks = tracks.filter(
+          (track) =>
+            track.singer &&
+            track.singer.name &&
+            track.singer.name.toLowerCase().includes(artistName.toLowerCase())
+        );
+      }
+
+      if (category) {
+        tracks = tracks.filter(
+          (track) =>
+            track.genre &&
+            track.genre.name &&
+            track.genre.name.toLowerCase().includes(category.toLowerCase())
+        );
+      }
 
       res.json({ success: true, data: tracks });
     } catch (error) {

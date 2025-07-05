@@ -1,14 +1,21 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const trackSchema = new Schema({
+const trackSchema = new Schema(
+  {
     title: { type: String, required: true },
-    singer: { type: Schema.Types.ObjectId, ref: 'Singer' },
-    album: { type: Schema.Types.ObjectId, ref: 'Album' },
-    genre: { type: Schema.Types.ObjectId, ref: 'Genre' },
+    singer: { type: Schema.Types.ObjectId, ref: "Singer" },
+    album: { type: Schema.Types.ObjectId, ref: "Album" },
+    genre: { type: Schema.Types.ObjectId, ref: "Genre" },
     audioUrl: { type: String },
-    coverImageUrl: { type: String }
-}, { timestamps: { createdAt: true, updatedAt: false }, toJSON: { virtuals: true } });
+    coverImageUrl: { type: String },
+    situation: { type: String, enum: ["draft", "publish"], default: "draft" },
+  },
+  {
+    timestamps: { createdAt: true, updatedAt: false },
+    toJSON: { virtuals: true },
+  }
+);
 
-export default mongoose.model('Track', trackSchema)
+export default mongoose.model("Track", trackSchema);
