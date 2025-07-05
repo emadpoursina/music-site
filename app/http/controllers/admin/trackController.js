@@ -1,5 +1,5 @@
 import Controller from "../controller.js";
-import Track from "../../models/track.js";
+import Track from "../../../models/track.js";
 
 class TrackController extends Controller {
   // GET /admin/tracks - List all tracks
