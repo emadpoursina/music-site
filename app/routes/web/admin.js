@@ -14,6 +14,7 @@ import peopleController from "../../http/controllers/admin/peopleController.js";
 import movieController from "../../http/controllers/admin/movieController.js";
 import seriesController from "../../http/controllers/admin/seriesController.js";
 import episodeController from "../../http/controllers/admin/episodeController.js";
+import settingController from "../../http/controllers/admin/settingController.js";
 
 // Admin Routes
 router.get("/dashboard", adminController.dashboard);
@@ -131,5 +132,11 @@ router.get("/episodes/edit/:id/", episodeController.edit);
 router.put("/episodes/:id", episodeController.update);
 router.delete("/episodes/:id", episodeController.destroy);
 router.post("/episodes/bulk-delete", episodeController.bulkDestroy);
+
+// Admin Settings Routes
+router.get("/settings", settingController.index);
+router.post("/settings", settingController.store);
+router.get("/settings/:id", settingController.show);
+router.put("/settings/:id", settingController.update);
 
 export default router;
