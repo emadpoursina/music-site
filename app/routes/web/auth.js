@@ -1,20 +1,20 @@
-import express from 'express'
+import express from "express";
 // const passport = require('passport');
 
 const router = express.Router();
 
 // Controllers
-import registerController from '../../http/controllers/auth/registerController.js';
-import loginController from '../../http/controllers/auth/loginController.js';
+import registerController from "../../http/controllers/auth/registerController.js";
+import loginController from "../../http/controllers/auth/loginController.js";
 // const forgotPasswordController = require('app/http/controllers/auth/forgotPasswordController');
 // const resetPasswordController = require('app/http/controllers/auth/resetPasswordController');
 
 // Routes
-router.get('/login' , loginController.showLoginForm);
-router.post('/login' , loginController.login);
+router.get("/login", loginController.showLoginForm);
+router.post("/login", loginController.login);
 
-router.get('/register' , registerController.showRegsitrationForm);
-router.post('/register' , registerController.register); 
+router.get("/register", registerController.showRegsitrationForm);
+router.post("/register", registerController.register);
 
 // router.get('/password/sendRecoveryEmail' , forgotPasswordController.showForgotPassword);
 // router.post('/password/sendRecoveryEmail' , forgotPasswordController.sendResetLink);
@@ -25,4 +25,4 @@ router.post('/register' , registerController.register);
 // router.get('/google' , passport.authenticate('google' , { scope : ['profile' , 'email'] }));
 // router.get('/google/callback' , passport.authenticate('google' , { successRedirect : '/' , failureRedirect : '/register' }) )
 
-export default router
+export default router;
