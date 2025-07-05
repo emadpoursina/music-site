@@ -8,6 +8,7 @@ import singerController from "../../http/controllers/admin/singerController.js";
 import albumController from "../../http/controllers/admin/albumController.js";
 import genreController from "../../http/controllers/admin/genreController.js";
 import userController from "../../http/controllers/admin/userController.js";
+import playlistController from "../../http/controllers/admin/playlistController.js";
 
 // Admin Routes
 router.get("/dashboard", adminController.dashboard);
@@ -62,5 +63,15 @@ router.put("/users/:id", userController.update);
 router.delete("/users/:id", userController.destroy);
 router.post("/users/bulk-delete", userController.bulkDestroy);
 router.put("/users/bulk-role", userController.bulkUpdateRole);
+
+// Admin Playlists Routes
+router.get("/playlists", playlistController.index);
+router.get("/playlists/create", playlistController.create);
+router.post("/playlists", playlistController.store);
+router.get("/playlists/:id", playlistController.show);
+router.get("/playlists/edit/:id/", playlistController.edit);
+router.put("/playlists/:id", playlistController.update);
+router.delete("/playlists/:id", playlistController.destroy);
+router.post("/playlists/bulk-delete", playlistController.bulkDestroy);
 
 export default router;
