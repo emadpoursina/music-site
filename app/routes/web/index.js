@@ -10,8 +10,7 @@ import adminRouter from "./admin.js";
 
 // Middlewares
 import redirectIfNotAuthenticated from "../../http/middlewares/redirectIfNotAuthenticated.js";
-// const redirectIfNotAuthenticated = require('app/http/middleware/redirectIfNotAuthenticated');
-// const redirectIfNotAdmin = require('app/http/middleware/redirectIfNotAdmin');
+import redirectIfNotAdmin from "../../http/middlewares/redirectIfNotAdmin.js";
 // const errorHandler = require('app/http/middleware/errorHandler');
 
 const router = express.Router();
@@ -23,7 +22,7 @@ router.use("/", pageRouter);
 router.use(
   "/admin",
   redirectIfNotAuthenticated,
-  // redirectIfNotAdmin.handle,
+  redirectIfNotAdmin,
   adminRouter
 );
 
