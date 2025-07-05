@@ -1,9 +1,9 @@
-import Controller from '../controller.js'
-import User from '../../../models/user.js'
+import Controller from "../controller.js";
+import User from "../../../models/user.js";
 
 class RegisterController extends Controller {
   showRegsitrationForm(req, res) {
-    res.send("Login Form")
+    res.send("Register Form");
   }
 
   async register(req, res) {
@@ -14,7 +14,7 @@ class RegisterController extends Controller {
       const newUser = new User({
         name,
         email,
-        password: '' // will hash below
+        password: "", // will hash below
       });
 
       newUser.password = newUser.hashPassword(password);
@@ -26,12 +26,14 @@ class RegisterController extends Controller {
         name: newUser.name,
         email: newUser.email,
         avatarUrl: newUser.avatarUrl,
-        role: newUser.role
+        role: newUser.role,
       };
 
-      res.status(201).json({ message: 'User registered successfully', user: userResponse });
+      res
+        .status(201)
+        .json({ message: "User registered successfully", user: userResponse });
     } catch (err) {
-      res.status(500).json({ message: 'Server error', error: err.message });
+      res.status(500).json({ message: "Server error", error: err.message });
     }
   }
 }
