@@ -7,14 +7,6 @@ import jwt from "jsonwebtoken";
 
 const Schema = mongoose.Schema;
 
-const playlistSchema = new Schema(
-  {
-    name: { type: String, required: true },
-    tracks: [{ type: Schema.Types.ObjectId, ref: "Track" }],
-  },
-  { _id: false }
-);
-
 const userSchema = new Schema(
   {
     name: { type: String, minLength: 3, maxLength: 50, required: true },
@@ -29,7 +21,6 @@ const userSchema = new Schema(
     avatarUrl: { type: String },
     role: { type: String, enum: ["user", "admin"], default: "user" },
     likedTracks: [{ type: Schema.Types.ObjectId, ref: "Track" }],
-    playlists: [playlistSchema],
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );
