@@ -22,7 +22,7 @@ router.use("/", pageRouter);
 // Admin Router
 router.use(
   "/admin",
-  redirectIfNotAuthenticated.handle,
+  redirectIfNotAuthenticated,
   // redirectIfNotAdmin.handle,
   adminRouter
 );
@@ -35,7 +35,7 @@ router.use("/track", trackRouter);
 router.use("/post", postRouter);
 
 // Auth Router
-router.use("/auth", redirectIfNotAuthenticated.handle, authRouter);
+router.use("/auth", redirectIfNotAuthenticated, authRouter);
 
 // Handle Errors
 // router.all('*' , errorHandler.error404);
