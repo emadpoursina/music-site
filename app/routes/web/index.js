@@ -34,7 +34,7 @@ router.use("/track", trackRouter);
 router.use("/post", postRouter);
 
 // Auth Router
-router.use("/auth", redirectIfNotAuthenticated, authRouter);
+router.use("/auth", authRouter);
 
 // Handle Errors
 // router.all('*' , errorHandler.error404);
