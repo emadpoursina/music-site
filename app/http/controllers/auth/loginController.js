@@ -1,5 +1,3 @@
-import config from "config";
-import jwt from "jsonwebtoken";
 import Controller from "../controller.js";
 import User from "../../../models/user.js";
 
@@ -27,16 +25,7 @@ class loginController extends Controller {
       if (!isMatch)
         return res.status(401).json({ message: "Invalid credentials." });
 
-      const token = jwt.sign(
-        {
-          id: user._id,
-          email: user.email,
-        },
-        config.get("jwt.secret"),
-        {
-          expiresIn: config.get("jwt.expires"),
-        }
-      );
+      const token = user.generateAuthToken();
 
       // Set cookie
       res.cookie("token", token, {

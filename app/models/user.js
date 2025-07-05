@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import uniqueString from "unique-string";
 import mongoosePaginate from "mongoose-paginate";
+import config from "config";
+import jwt from "jsonwebtoken";
 
 const Schema = mongoose.Schema;
 
@@ -55,6 +57,19 @@ userSchema.methods.setRememberToken = function (res) {
   this.updateOne({ rememberToken: token }, (err) => {
     if (err) console.log(err);
   });
+};
+
+userSchema.methods.generateAuthToken = function () {
+  jwt.sign(
+    {
+      id: user._id,
+      email: user.email,
+    },
+    config.get("jwt.secret"),
+    {
+      expiresIn: config.get("jwt.expires"),
+    }
+  );
 };
 
 export default mongoose.model("User", userSchema);
