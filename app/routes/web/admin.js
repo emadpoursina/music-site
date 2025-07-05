@@ -12,6 +12,7 @@ import playlistController from "../../http/controllers/admin/playlistController.
 import playlistCategoryController from "../../http/controllers/admin/playlistCategoryController.js";
 import peopleController from "../../http/controllers/admin/peopleController.js";
 import movieController from "../../http/controllers/admin/movieController.js";
+import episodeController from "../../http/controllers/admin/episodeController.js";
 
 // Admin Routes
 router.get("/dashboard", adminController.dashboard);
@@ -109,5 +110,15 @@ router.get("/movies/edit/:id/", movieController.edit);
 router.put("/movies/:id", movieController.update);
 router.delete("/movies/:id", movieController.destroy);
 router.post("/movies/bulk-delete", movieController.bulkDestroy);
+
+// Admin Episodes Routes
+router.get("/episodes", episodeController.index);
+router.get("/episodes/create", episodeController.create);
+router.post("/episodes", episodeController.store);
+router.get("/episodes/:id", episodeController.show);
+router.get("/episodes/edit/:id/", episodeController.edit);
+router.put("/episodes/:id", episodeController.update);
+router.delete("/episodes/:id", episodeController.destroy);
+router.post("/episodes/bulk-delete", episodeController.bulkDestroy);
 
 export default router;
