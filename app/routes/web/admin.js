@@ -15,5 +15,7 @@ router.post("/tracks", trackController.store);
 router.get("/tracks/edit/:id/", trackController.edit);
 router.put("/tracks/:id", trackController.update);
 router.delete("/tracks/:id", trackController.destroy);
+router.post("/tracks/bulk-delete", trackController.bulkDestroy);
+router.put("/tracks/bulk-status", trackController.bulkUpdateStatus);
 
 export default router;

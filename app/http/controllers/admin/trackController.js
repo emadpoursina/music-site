@@ -1,5 +1,6 @@
 import Controller from "../controller.js";
 import Track from "../../../models/track.js";
+import mongoose from "mongoose";
 
 class TrackController extends Controller {
   // GET /admin/tracks - List all tracks
@@ -157,6 +158,100 @@ class TrackController extends Controller {
       }
 
       res.json({ success: true, message: "Track deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  }
+
+  // POST /admin/tracks/bulk-delete - Bulk delete tracks
+  async bulkDestroy(req, res) {
+    try {
+      const { trackIds } = req.body;
+
+      if (!trackIds || !Array.isArray(trackIds) || trackIds.length === 0) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Track IDs array is required" });
+      }
+
+      // Validate that all IDs are valid ObjectIds
+      const validIds = trackIds.filter((id) =>
+        mongoose.Types.ObjectId.isValid(id)
+      );
+
+      if (validIds.length !== trackIds.length) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Some track IDs are invalid" });
+      }
+
+      const result = await Track.deleteMany({ _id: { $in: trackIds } });
+
+      if (result.deletedCount === 0) {
+        return res
+          .status(404)
+          .json({ success: false, message: "No tracks found to delete" });
+      }
+
+      res.json({
+        success: true,
+        message: `${result.deletedCount} track(s) deleted successfully`,
+        deletedCount: result.deletedCount,
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  }
+
+  // PUT /admin/tracks/bulk-status - Bulk update track status
+  async bulkUpdateStatus(req, res) {
+    try {
+      const { trackIds, situation } = req.body;
+
+      if (!trackIds || !Array.isArray(trackIds) || trackIds.length === 0) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Track IDs array is required" });
+      }
+
+      if (!situation || !["draft", "publish"].includes(situation)) {
+        return res
+          .status(400)
+          .json({
+            success: false,
+            message: "Valid situation (draft or publish) is required",
+          });
+      }
+
+      // Validate that all IDs are valid ObjectIds
+      const validIds = trackIds.filter((id) =>
+        mongoose.Types.ObjectId.isValid(id)
+      );
+
+      if (validIds.length !== trackIds.length) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Some track IDs are invalid" });
+      }
+
+      const result = await Track.updateMany(
+        { _id: { $in: trackIds } },
+        { situation },
+        { runValidators: true }
+      );
+
+      if (result.matchedCount === 0) {
+        return res
+          .status(404)
+          .json({ success: false, message: "No tracks found to update" });
+      }
+
+      res.json({
+        success: true,
+        message: `${result.modifiedCount} track(s) status updated to ${situation}`,
+        modifiedCount: result.modifiedCount,
+        situation,
+      });
     } catch (error) {
       res.status(500).json({ success: false, message: error.message });
     }
