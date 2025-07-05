@@ -5,9 +5,7 @@ const router = express.Router();
 import adminController from "../../http/controllers/admin/adminController.js";
 import trackController from "../../http/controllers/admin/trackController.js";
 import singerController from "../../http/controllers/admin/singerController.js";
-
-// Admin Routes
-router.get("/", adminController.index);
+import albumController from "../../http/controllers/admin/albumController.js";
 
 // Admin Routes
 router.get("/", adminController.index);
@@ -32,5 +30,14 @@ router.put("/singers/:id", singerController.update);
 router.delete("/singers/:id", singerController.destroy);
 router.post("/singers/bulk-delete", singerController.bulkDestroy);
 
-export default router;
+// Admin Albums Routes
+router.get("/albums", albumController.index);
+router.get("/albums/create", albumController.create);
+router.post("/albums", albumController.store);
+router.get("/albums/:id", albumController.show);
+router.get("/albums/edit/:id/", albumController.edit);
+router.put("/albums/:id", albumController.update);
+router.delete("/albums/:id", albumController.destroy);
+router.post("/albums/bulk-delete", albumController.bulkDestroy);
+
 export default router;
