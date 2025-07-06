@@ -5,6 +5,7 @@ import albumRouter from "./album.js";
 import genreRouter from "./genre.js";
 import trackRouter from "./track.js";
 import postRouter from "./post.js";
+import commentRouter from "./comment.js";
 import authRouter from "./auth.js";
 import adminRouter from "./admin.js";
 
@@ -32,6 +33,7 @@ router.use("/album", albumRouter);
 router.use("/genre", genreRouter);
 router.use("/track", trackRouter);
 router.use("/post", postRouter);
+router.use("/comments", commentRouter);
 
 // Auth Router
 router.use("/auth", authRouter);
