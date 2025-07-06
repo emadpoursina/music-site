@@ -15,6 +15,7 @@ import movieController from "../../http/controllers/admin/movieController.js";
 import seriesController from "../../http/controllers/admin/seriesController.js";
 import episodeController from "../../http/controllers/admin/episodeController.js";
 import settingController from "../../http/controllers/admin/settingController.js";
+import commentController from "../../http/controllers/admin/commentController.js";
 
 // Admin Routes
 router.get("/dashboard", adminController.dashboard);
@@ -138,5 +139,15 @@ router.get("/settings", settingController.index);
 router.post("/settings", settingController.store);
 router.get("/settings/:id", settingController.show);
 router.put("/settings/:id", settingController.update);
+
+// Admin Comments Routes
+router.get("/comments", commentController.index);
+router.get("/comments/:id", commentController.show);
+router.delete("/comments/:id", commentController.destroy);
+router.post("/comments/bulk-delete", commentController.bulkDestroy);
+router.put("/comments/bulk-status", commentController.bulkUpdateStatus);
+router.get("/comments/pending", commentController.pending);
+router.put("/comments/:id/approve", commentController.approve);
+router.put("/comments/:id/deny", commentController.deny);
 
 export default router;
